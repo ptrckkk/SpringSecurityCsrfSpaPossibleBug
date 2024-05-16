@@ -35,6 +35,10 @@ class SecurityConfig {
                 .csrfTokenRequestHandler(SpaCsrfTokenRequestHandler())
         }
 
+        http.authorizeHttpRequests{ authorizeCustomizer ->
+            authorizeCustomizer.requestMatchers("/hello").permitAll()
+        }
+
         http.addFilterAfter(CsrfCookieFilter(), BasicAuthenticationFilter::class.java)
         return http.build()
     }
